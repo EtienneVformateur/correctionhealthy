@@ -4,6 +4,7 @@ import 'component/maCarte.dart';
 import 'component/selectGenre.dart';
 
 const activeColor = Color(0xFF1D1E33);
+const inactiveCouleur = Color(0xFF111328);
 
 class InputPage extends StatefulWidget {
   const InputPage({Key? key}) : super(key: key);
@@ -13,6 +14,24 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+  Color carteHommeCouleur = inactiveCouleur;
+  Color carteFemmeCouleur = inactiveCouleur;
+
+  updateCouleur(int genre) {
+    if (genre == 1 && carteHommeCouleur == inactiveCouleur) {
+      carteFemmeCouleur = inactiveCouleur;
+      carteHommeCouleur = activeColor;
+    } else if (genre == 2 && carteFemmeCouleur == inactiveCouleur) {
+      carteFemmeCouleur = activeColor;
+      carteHommeCouleur = inactiveCouleur;
+    } else if (genre == 1) {
+      carteHommeCouleur = inactiveCouleur;
+    } else if (genre == 2) {
+      carteFemmeCouleur = inactiveCouleur;
+    }
+    ;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,23 +46,36 @@ class _InputPageState extends State<InputPage> {
               children: [
                 Expanded(
                   child: MaCarte(
-                    activeColor,
-                    SelectGenre("Homme", FontAwesomeIcons.mars),
+                    carteHommeCouleur,
+                    GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            updateCouleur(1);
+                          });
+                        },
+                        child: SelectGenre("Homme", FontAwesomeIcons.mars)),
                   ),
                 ),
                 Expanded(
-                  child: MaCarte(activeColor,
-                      SelectGenre("Femme", FontAwesomeIcons.venus)),
+                  child: MaCarte(
+                      carteFemmeCouleur,
+                      GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              updateCouleur(2);
+                            });
+                          },
+                          child: SelectGenre("Femme", FontAwesomeIcons.venus))),
                 ),
               ],
             ),
           ),
-          Expanded(child: MaCarte(activeColor, Container())),
+          Expanded(child: MaCarte(inactiveCouleur, Container())),
           Expanded(
             child: Row(
               children: [
-                Expanded(child: MaCarte(activeColor, Container())),
-                Expanded(child: MaCarte(activeColor, Container())),
+                Expanded(child: MaCarte(inactiveCouleur, Container())),
+                Expanded(child: MaCarte(inactiveCouleur, Container())),
               ],
             ),
           ),
