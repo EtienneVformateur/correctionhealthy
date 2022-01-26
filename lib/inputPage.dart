@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'component/maCarte.dart';
+import 'component/selectGenre.dart';
 
 const activeColor = Color(0xFF1D1E33);
 
@@ -26,38 +28,12 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   child: MaCarte(
                     activeColor,
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Icon(
-                          FontAwesomeIcons.mars,
-                          size: 120,
-                        ),
-                        Text(
-                          "HOMME",
-                          style: TextStyle(fontSize: 25),
-                        )
-                      ],
-                    ),
+                    SelectGenre("Homme", FontAwesomeIcons.mars),
                   ),
                 ),
                 Expanded(
-                  child: MaCarte(
-                    activeColor,
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Icon(
-                          FontAwesomeIcons.venus,
-                          size: 120,
-                        ),
-                        Text(
-                          "FEMME",
-                          style: TextStyle(fontSize: 25),
-                        )
-                      ],
-                    ),
-                  ),
+                  child: MaCarte(activeColor,
+                      SelectGenre("Femme", FontAwesomeIcons.venus)),
                 ),
               ],
             ),
@@ -72,25 +48,6 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class MaCarte extends StatelessWidget {
-  final Color couleur;
-  final Widget carteChild;
-
-  MaCarte(this.couleur, this.carteChild);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: carteChild,
-      margin: EdgeInsets.all(15.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.0),
-        color: couleur,
       ),
     );
   }
