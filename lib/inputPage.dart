@@ -34,27 +34,22 @@ class _InputPageState extends State<InputPage> {
                     genreSelectionne == Genre.Homme
                         ? activeColor
                         : inactiveCouleur,
-                    GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            genreSelectionne = Genre.Homme;
-                          });
-                        },
-                        child: SelectGenre("Homme", FontAwesomeIcons.mars)),
+                    SelectGenre("Homme", FontAwesomeIcons.mars),
+                    mafonction: () => setState(() {
+                      genreSelectionne = Genre.Homme;
+                    }),
                   ),
                 ),
                 Expanded(
                   child: MaCarte(
-                      genreSelectionne == Genre.Femme
-                          ? activeColor
-                          : inactiveCouleur,
-                      GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              genreSelectionne = Genre.Femme;
-                            });
-                          },
-                          child: SelectGenre("Femme", FontAwesomeIcons.venus))),
+                    genreSelectionne == Genre.Femme
+                        ? activeColor
+                        : inactiveCouleur,
+                    SelectGenre("Femme", FontAwesomeIcons.venus),
+                    mafonction: () => setState(() {
+                      genreSelectionne = Genre.Femme;
+                    }),
+                  ),
                 ),
               ],
             ),
